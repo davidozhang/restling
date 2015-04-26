@@ -16,3 +16,5 @@ To use the public lyrics endpoint, hit the /lyrics endpoint, which supports the 
 ```
 
 The full lyrics body is omitted by ```...``` since it's pretty long. Lines in the lyrics are separated by ```\n```, so you could easily parse it to use for your needs.
+
+Use a REST Client to interact with the FAQ (frequently asked questions) endpoint at /faq. The supported resource parameters are ```question``` and ```answer```. 
