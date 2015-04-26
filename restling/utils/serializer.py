@@ -9,3 +9,7 @@ def dumps(data):
 
 def loads(json_data):
     return json.loads(json_data)
+
+
+def format(data=None, status='success', message=None):
+	return dumps({'status': status, 'message': message, 'data': data})
