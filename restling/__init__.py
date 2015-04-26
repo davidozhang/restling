@@ -9,6 +9,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:restling@localhost/restlin
 
 from restling.utils import serializer
 
+# Import and register all services and endpoints
+from restling.services.faq import Collection, Detail
+app.add_url_rule('/faq', view_func=Collection.as_view('faq_collection'))
+app.add_url_rule('/faq/<id>', view_func=Detail.as_view('faq_detail'))
+
 
 @app.route('/')
 def index():
@@ -18,6 +23,21 @@ def index():
 @app.route('/ping')
 def ping():
 	return 'restling is up and running!'
+
+@app.errorhandler(401)
+def unauthorized(e):
+	return serializer.format(status='error', message='unauthorized.'), 401
+
+@app.errorhandler(404)
+def not_found(e):
+	return serializer.format(status='error', message='page not found.'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+	return serializer.format(
+		status='error',
+		message='something\'s wrong with the restling server.',
+	), 500
 
 
 @app.route('/lyrics', methods=['GET'])
