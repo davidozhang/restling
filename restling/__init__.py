@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -10,15 +10,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:restling@localhost/restlin
 from restling.utils import serializer
 
 # Import and register all services and endpoints
-from restling.services.faq import Collection, Detail
-app.add_url_rule('/faq', view_func=Collection.as_view('faq_collection'))
-app.add_url_rule('/faq/<id>', view_func=Detail.as_view('faq_detail'))
+from restling.services.faq import FAQ_Collection, FAQ_Detail
+app.add_url_rule('/faq', view_func=FAQ_Collection.as_view('faq_collection'))
+app.add_url_rule('/faq/<id>', view_func=FAQ_Detail.as_view('faq_detail'))
 
 
 @app.route('/')
 def index():
-	return 'restling api index page.'
-
+	return 'welcome to restling api!'
 
 @app.route('/ping')
 def ping():
