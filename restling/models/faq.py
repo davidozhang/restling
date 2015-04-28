@@ -9,9 +9,9 @@ class FAQ(db.Model):
 	question = db.Column(db.TEXT, nullable=False)
 	answer = db.Column(db.TEXT, nullable=False)
 
-	def __init__(self, question, answer):
-		self.question = question
-		self.answer = answer
+	def __init__(self, _dict):
+		for key in _dict:
+			setattr(self, key, _dict[key])
 
 	@property
 	def serialize(self):
