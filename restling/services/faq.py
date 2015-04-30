@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import jsonify, request
-
-from restling import app, db
 from restling.models.faq import FAQ
-from restling.utils import errors, serializer
 from restling.utils.services import RestlingCollection, RestlingDetail
 
 '''
