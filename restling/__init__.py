@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -17,11 +17,11 @@ app.add_url_rule('/faq/<id>', view_func=FAQ_Detail.as_view('faq_detail'))
 
 @app.route('/')
 def index():
-	return 'welcome to restling api!'
+	return render_template('index.html')
 
 @app.route('/ping')
 def ping():
-	return 'restling is up and running!'
+	return render_template('status.html')
 
 @app.errorhandler(401)
 def unauthorized(e):
