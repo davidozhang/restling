@@ -2,8 +2,10 @@
 
 from flask import Flask, request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sslify import SSLify
 
 app = Flask(__name__)
+sslify = SSLify(app)	#enable SSL redirect
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:restling@localhost/restling'
 
