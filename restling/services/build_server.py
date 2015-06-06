@@ -25,16 +25,17 @@ class Build_Server_Collection(RestlingCollection):
 	Allow client to upload C-File to the Restling Server.
 	'''
 	def post(self):
-		accepted = set(['source.c'])
-		file_ = request.files['file']
-		if file_.filename not in accepted:
-			flash('Please submit files with these names: {}.'.format(list(accepted)))
-			return render_template('upload.html')
-		self.file_path = os.path.join(
-			app.config['UPLOAD_FOLDER'],
-			file_.filename,
-		)
-		file_.save(self.file_path)
+		uploaded_files = request.files.getlist('file[]')
+		for f in uploaded_files:
+			file_path = os.path.join(
+				app.config['UPLOAD_FOLDER'],
+				f.filename,
+			)
+			try:
+				f.save(file_path)
+			except IOError:
+				flash('Please upload 1 or more files.')
+				return render_template('upload.html')
 		return self._compile()
 
 	'''
@@ -52,6 +53,9 @@ class Build_Server_Collection(RestlingCollection):
 		err = p.stderr.read()
 		if err:
 			flash('Build Error: '+err)
+			output_file = app.config['UPLOAD_FOLDER']+'/output'
+			if os.path.exists(output_file):
+				os.remove(output_file)
 		else:
 			flash('Compile Successful. Click Download to download a copy of the binary.')
 		return render_template('upload.html')
@@ -60,8 +64,7 @@ class Build_Server_Collection(RestlingCollection):
 class Build_Server_Detail(RestlingDetail):
 	'''
 	Allow client to download only the compiled binary file.
-	It will return a JSON with error message if the client tries
-	to download a file other than the specified output.
+	Uses flash to notify user of any issues with downloading file.
 	Otherwise, it will return the binary file.
 	'''	
 	def get(self, filename):

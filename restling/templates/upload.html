@@ -12,7 +12,7 @@
     <hr/>
     <div>
       <form action="/build" method="post" enctype="multipart/form-data">
-       <input type="file" name="file"><br /><br />
+       <input type="file" multiple="" name="file[]"><br /><br />
        <input type="submit" value="Upload">
       </form>
       <form action="/build/output" method="get" enctype="multipart/form-data">
