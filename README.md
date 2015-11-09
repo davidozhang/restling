@@ -1,15 +1,16 @@
 # Restling
 
-My RESTful API built on Python Flask. Try it out at http://restling.co!
+My RESTful API built on Python Flask. Try it out at https://restling.co!
 
 ## Version
+
 1.0
 
 ## Usage
 
 To ping the restling server, use the /ping endpoint.
 
-To use the public lyrics endpoint, hit the /lyrics endpoint, which supports the parameters 'artist' and 'track'. For example, http://restling.co/lyrics?artist=Taylor_Swift&track=Blank_Space will give you the following JSON response:
+To use the public lyrics endpoint, hit the /lyrics endpoint, which supports the parameters 'artist' and 'track'. For example, https://restling.co/lyrics?artist=Taylor_Swift&track=Blank_Space will give you the following JSON response:
 
 ```
 {"status": "success", "message": null, "data": {"hometown": "Nashville", "preview": "Nice to meet you, where you been?", "lyrics": "Nice to meet you, where you been?\nI could show you incredible things...And I'll write your name\n"}}
