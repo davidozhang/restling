@@ -4,19 +4,6 @@ from flask import Flask, request
 import serializer
 
 app = Flask(__name__)
-'''
-from flask.ext.sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:restling@localhost/restling'
-
-from restling.utils import serializer
-
-# Import and register all services and endpoints
-from restling.services.faq import FAQ_Collection, FAQ_Detail
-app.add_url_rule('/faq', view_func=FAQ_Collection.as_view('faq_collection'))
-app.add_url_rule('/faq/<id>', view_func=FAQ_Detail.as_view('faq_detail'))
-'''
 
 @app.route('/')
 def index():
