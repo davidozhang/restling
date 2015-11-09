@@ -2,10 +2,11 @@
 
 from flask import Flask, request
 import serializer
+
+app = Flask(__name__)
 '''
 from flask.ext.sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:restling@localhost/restling'
 
